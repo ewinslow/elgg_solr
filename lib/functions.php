@@ -86,7 +86,7 @@ function elgg_solr_reindex() {
 			}
 
 			// notify every 200 entities
-			if (!($count % $batch_size)) {
+			if (!($count % 200)) {
 				$qtime = round($fetch_time, 4);
 				$percent = round($count / $final_count * 100);
 				$report = array(
