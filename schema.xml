@@ -25,6 +25,7 @@
    <field name="name" type="text_general" indexed="true" stored="true"/>
    <field name="username" type="string" indexed="true" stored="true" multiValued="false" />
    <field name="email" type="string" indexed="true" stored="true" multiValued="false" />
+   <field name="banned" type="string" indexed="true" stored="true" multiValued="false" />
    
    <!-- generic fields for custom filter queries -->
    <field name="elgg_string1" type="string" indexed="true" stored="true" multiValued="true" />

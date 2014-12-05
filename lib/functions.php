@@ -83,6 +83,10 @@ function elgg_solr_reindex() {
 			if ($first_entity) {
 				// this is the first entity in the new batch
 				$fetch_time = microtime(true) - $fetch_time_start; // the query time in seconds
+			}
+
+			// notify every 200 entities
+			if (!($count % $batch_size)) {
 				$qtime = round($fetch_time, 4);
 				$percent = round($count / $final_count * 100);
 				$report = array(
@@ -602,6 +606,7 @@ function elgg_solr_add_update_user($entity) {
 	$doc->description = elgg_strip_tags($desc);
 	$doc->time_created = $entity->time_created;
 	$doc->tags = elgg_solr_get_tags_array($entity);
+	$doc->banned = $entity->banned;
 
 	//@TODO - investigate these
 	// set a document boost value
