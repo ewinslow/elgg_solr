@@ -91,7 +91,7 @@ function elgg_solr_reindex() {
 				$percent = round($count / $final_count * 100);
 				$report = array(
 					'percent' => $percent,
-					'count' => $count - 1, // report prior to indexing this entity
+					'count' => $count,
 					'typecount' => $final_count,
 					'fullcount' => $fullcount,
 					'type' => $type,
