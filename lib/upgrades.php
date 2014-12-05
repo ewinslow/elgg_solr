@@ -53,3 +53,8 @@ function elgg_solr_upgrade_20140504b() {
 		elgg_set_plugin_setting('hl_suffix', '</strong>', 'elgg_solr');
 	}
 }
+
+
+function elgg_solr_upgrade_20141201() {
+	elgg_set_plugin_setting('reindex_batch_size', 1000, 'elgg_solr');
+}

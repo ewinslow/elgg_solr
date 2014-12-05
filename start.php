@@ -1,8 +1,8 @@
 <?php
 
-require_once 'lib/functions.php';
-require_once 'lib/hooks.php';
-require_once 'lib/events.php';
+require_once __DIR__ . '/lib/functions.php';
+require_once __DIR__ . '/lib/hooks.php';
+require_once __DIR__ . '/lib/events.php';
 
 elgg_register_event_handler('init', 'system', 'elgg_solr_init');
 
@@ -72,4 +72,6 @@ function elgg_solr_init() {
 	elgg_register_action('elgg_solr/settings/save', dirname(__FILE__) . '/actions/plugin_settings.php', 'admin');
 	
 	elgg_register_admin_menu_item('administer', 'solr_index', 'administer_utilities');
+	
+	elgg_register_ajax_view('elgg_solr/ajax/progress');
 }

@@ -1,4 +1,8 @@
 <?php
+
+echo elgg_view('elgg_solr/admin_header');
+
+
 	$type = get_input('type');
 	$subtype = get_input('subtype');
 	$time = get_input('time');

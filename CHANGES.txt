@@ -2,11 +2,11 @@
 
 x.x (mm/dd/yyyy):
 
-1.5.1 (06/16/2014):
+1.6 (12/05/2014):
  - fix comment index deletion
  - add plugin setting for admin viewing of relevancy scores
- - reindex resolution reduced to the second
- - fix search query for ACCESS_PRIVATE
+ - fix for mysql large offset query time issue
+ - add basic reindexing feedback
 
 1.5 (05/10/2014):
  - enables wildcard search with *
