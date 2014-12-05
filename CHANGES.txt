@@ -2,7 +2,7 @@
 
 x.x (mm/dd/yyyy):
 
-1.6 (12/05/2014):
+1.5.1 (12/05/2014):
  - fix comment index deletion
  - add plugin setting for admin viewing of relevancy scores
  - fix for mysql large offset query time issue
