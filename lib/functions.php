@@ -471,6 +471,9 @@ function elgg_solr_add_update_file($entity) {
 	$doc->description = elgg_strip_tags($entity->description);
 	$doc->time_created = $entity->time_created;
 	$doc->tags = elgg_solr_get_tags_array($entity);
+	
+	$params = array('entity' => $entity);
+	$doc = elgg_trigger_plugin_hook('elgg_solr:index', $entity->type, $params, $doc);
 
 	//@TODO - investigate these
 	// set a document boost value
@@ -535,6 +538,9 @@ function elgg_solr_add_update_object_default($entity) {
 	$doc->description = elgg_strip_tags($entity->description);
 	$doc->time_created = $entity->time_created;
 	$doc->tags = elgg_solr_get_tags_array($entity);
+	
+	$params = array('entity' => $entity);
+	$doc = elgg_trigger_plugin_hook('elgg_solr:index', $entity->type, $params, $doc);
 
 	//@TODO - investigate these
 	// set a document boost value
@@ -607,6 +613,9 @@ function elgg_solr_add_update_user($entity) {
 	$doc->time_created = $entity->time_created;
 	$doc->tags = elgg_solr_get_tags_array($entity);
 	$doc->banned = $entity->banned;
+	
+	$params = array('entity' => $entity);
+	$doc = elgg_trigger_plugin_hook('elgg_solr:index', $entity->type, $params, $doc);
 
 	//@TODO - investigate these
 	// set a document boost value
