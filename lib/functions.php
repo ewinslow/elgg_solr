@@ -375,6 +375,10 @@ function elgg_solr_get_default_fq($params) {
 	if ($access_query) {
 		$fq['access'] = $access_query;
 	}
+	
+	if (!access_get_show_hidden_status()) {
+		$fq['enabled'] = 'enabled:yes';
+	}
 
 	return $fq;
 }
@@ -471,6 +475,7 @@ function elgg_solr_add_update_file($entity) {
 	$doc->description = elgg_strip_tags($entity->description);
 	$doc->time_created = $entity->time_created;
 	$doc->tags = elgg_solr_get_tags_array($entity);
+	$doc->enabled = $entity->enabled;
 	
 	$params = array('entity' => $entity);
 	$doc = elgg_trigger_plugin_hook('elgg_solr:index', $entity->type, $params, $doc);
@@ -538,6 +543,7 @@ function elgg_solr_add_update_object_default($entity) {
 	$doc->description = elgg_strip_tags($entity->description);
 	$doc->time_created = $entity->time_created;
 	$doc->tags = elgg_solr_get_tags_array($entity);
+	$doc->enabled = $entity->enabled;
 	
 	$params = array('entity' => $entity);
 	$doc = elgg_trigger_plugin_hook('elgg_solr:index', $entity->type, $params, $doc);
@@ -613,6 +619,7 @@ function elgg_solr_add_update_user($entity) {
 	$doc->time_created = $entity->time_created;
 	$doc->tags = elgg_solr_get_tags_array($entity);
 	$doc->banned = $entity->banned;
+	$doc->enabled = $entity->enabled;
 	
 	$params = array('entity' => $entity);
 	$doc = elgg_trigger_plugin_hook('elgg_solr:index', $entity->type, $params, $doc);
