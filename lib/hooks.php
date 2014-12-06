@@ -22,10 +22,14 @@ function elgg_solr_file_search($hook, $type, $value, $params) {
 
     // get an update query instance
     $query = $client->createSelect($select);
-	$query->addSorts(array(
+	$default_sorts = array(
 		'score' => 'desc',
 		'time_created' => 'desc'
-	));
+	);
+	
+	$sorts = $params['sorts'] ? $params['sorts'] : $default_sorts;
+	
+	$query->addSorts($sorts);
 	
 	$title_boost = elgg_solr_get_title_boost();
 	$description_boost = elgg_solr_get_description_boost();
@@ -197,10 +201,14 @@ function elgg_solr_object_search($hook, $type, $return, $params) {
 	
 	// this query is now a dismax query
 	$query->setQuery($params['query']);
-	$query->addSorts(array(
+	$default_sorts = array(
 		'score' => 'desc',
 		'time_created' => 'desc'
-	));
+	);
+	
+	$sorts = $params['sorts'] ? $params['sorts'] : $default_sorts;
+	
+	$query->addSorts($sorts);
 	
 	// make sure we're only getting objectss
 	$params['fq']['type'] = 'type:object';
@@ -334,10 +342,15 @@ function elgg_solr_user_search($hook, $type, $return, $params) {
 
     // get an update query instance
     $query = $client->createSelect($select);
-	$query->addSorts(array(
+	
+	$default_sorts = array(
 		'score' => 'desc',
 		'time_created' => 'desc'
-	));
+	);
+	
+	$sorts = $params['sorts'] ? $params['sorts'] : $default_sorts;
+	
+	$query->addSorts($sorts);
 	
 	$title_boost = elgg_solr_get_title_boost();
 	$description_boost = elgg_solr_get_description_boost();
@@ -346,15 +359,6 @@ function elgg_solr_user_search($hook, $type, $return, $params) {
 	$dismax = $query->getEDisMax();
 	$dismax->setQueryFields("name^{$title_boost} username^{$title_boost} description^{$description_boost}");
 	$dismax->setQueryAlternative('*:*');
-	
-	// no time boost for users
-	/*
-	$boostQuery = elgg_solr_get_boost_query();
-	if ($boostQuery) {
-		$dismax->setBoostQuery($boostQuery);
-	}
-	 * 
-	 */
 	
 	// this query is now a dismax query
 	$query->setQuery($params['query']);
@@ -402,7 +406,7 @@ function elgg_solr_user_search($hook, $type, $return, $params) {
     $count = $resultset->getNumFound();
 	$hl_prefix = elgg_solr_get_hl_prefix();
 	$hl_suffix = elgg_solr_get_hl_suffix();
-	
+
 	$search_results = array();
     foreach ($resultset as $document) {
 		$search_results[$document->id] = array();
@@ -501,10 +505,14 @@ function elgg_solr_group_search($hook, $type, $return, $params) {
 
     // get an update query instance
     $query = $client->createSelect($select);
-	$query->addSorts(array(
+	$default_sorts = array(
 		'score' => 'desc',
 		'time_created' => 'desc'
-	));
+	);
+	
+	$sorts = $params['sorts'] ? $params['sorts'] : $default_sorts;
+	
+	$query->addSorts($sorts);
 	
 	$title_boost = elgg_solr_get_title_boost();
 	$description_boost = elgg_solr_get_description_boost();
